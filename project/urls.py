@@ -17,7 +17,10 @@ from django.contrib import admin
 from django.urls import path
 from app import views
 urlpatterns = [
-
-    path('', views.test),
+    path('', views.index),
+    path('index', views.index),
+    path('about', views.about),
+    path('projects', views.projects),
+    path('weather', views.weather),
     path('admin/', admin.site.urls),
 ]

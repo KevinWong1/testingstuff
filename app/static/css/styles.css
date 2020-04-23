@@ -1,3 +1,67 @@
-h1 {
-    color: pink;
+body {
+  margin-top: 20px;
+  background: url("../geometric-leaves.png");
+  background-size: auto;
+}
+
+.buttoncss {
+  background-color: thistle;
+  text-align: center;
+  display: block;
+  width: 100%;
+}
+
+.min_height {
+  min-height: 900px;
+}
+
+p {
+  font-family: "Baloo Da 2", cursive;
+  color: white;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+
+h1,
+h2 {
+  font-family: "Fredoka One", cursive;
+  color: whitesmoke;
+}
+
+.cat2 {
+  padding: 10px;
+}
+
+.pagetitle {
+  background-color: black;
+  text-align: center;
+  border: 5px solid orange;
+}
+
+div p {
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.catleft {
+  margin-bottom: 8px;
+}
+
+.strikingbackground {
+  border: 5px solid orange;
+  margin: 10px;
+  background: url("../strikingbackground.jpg") no-repeat top right;
+}
+
+.active {
+  background-color: indianred;
+}
+
+.project {
+  border-top: #ae0000 solid 1px;
+  padding-top: 20px;
+  margin-top: 20px;
+}
+
+img[src="../pic2.png"] {
+  margin-top: 10px;
 }
