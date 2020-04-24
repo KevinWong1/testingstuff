@@ -1,10 +1,10 @@
 import requests
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 import datetime
 import glob
 import os
-
+from django import forms
 
 pages = []
 all_content_files = glob.glob("app/templates/content/*.html")
@@ -18,27 +18,42 @@ for page in all_content_files:
     })
 year = datetime.datetime.now().strftime('%Y')
 
+class BlogPostForm(forms.Form):
+        name = forms.CharField(max_length=100)
+        post = forms.CharField(max_length=100)
+        time = forms.CharField(max_length=100)
+        date = forms.CharField(max_length=100)
+
+
 
 from .models import Blog
 
 def add_blog_post(request):
     context = {}
     # First, check if they have submitted something:
-    if 'name' in request.POST:
-
+    if request.method == 'POST':
+        form = BlogPostForm(request.POST)
+        if form.is_valid():
         # Then, get the name out of the POST dictionary
-        name = request.POST['name']
-        post = request.POST['post']
-        time = request.POST['time']
-        date = request.POST['date']
+            name = form.cleaned_data['name']
+            post = form.cleaned_data['post']
+            time = form.cleaned_data['time']
+            date = form.cleaned_data['date']
 
         # Finally, actually create the appointment
-        Blog.objects.create(
-            name=name,
-            date=date,
-            time=time,
-            post = post,
-        )
+            Blog.objects.create(
+                name=name,
+                date=date,
+                time=time,
+                post = post,
+            )
+
+            return redirect('/blog-posts')
+    else:
+        form = BlogPostForm
+    context = {
+        'form': form,
+    }
 
     return render(request, 'add_blog_post.html', context)
 
