@@ -9,13 +9,13 @@
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.css" rel="stylesheet" />
   <link rel="stylesheet" href="../static/css/styles.css" />
   <link href="https://fonts.googleapis.com/css?family=Baloo+Da+2|Fredoka+One&display=swap" rel="stylesheet" />
-  <title>{{ title }}</title>
+  <title>{% block title %}Title{% endblock title %}</title>
 </head>
 
 <body>
 
   <div class="container">
-    <h5 class="btn btn-outline-dark"> <a href="/weather">Click here for Oakland's current weather</a></h5>
+    <h5 class="btn btn-outline-dark"> <a href="{% url 'weather' %}">Click here for Oakland's current weather</a></h5>
     <h5 class="btn btn-outline-dark"> <a href="/add-blog-post">Click here to add blog posts</a></h5>
     <h5 class="btn btn-outline-dark"> <a href="/blog-posts">Click here to view blog posts</a></h5>
 
@@ -31,8 +31,6 @@
             <button type="button" class="btn buttoncss 
             {% if page.title == title  %}
             active
-            {% else %}
-            pass
             {% endif %}
             ">
 
@@ -44,7 +42,6 @@
 
       </div>
       <!-- end of left side panel -->
-
       {% block content %}
       {% endblock content %}
 
