@@ -1,0 +1,11 @@
+<h3>Blog Posts</h3>
+
+
+{% for post in posts %}
+
+<h1>{{ post.name }}</h1>
+<h2>{{ post.date }}</h2>
+<h2>{{ post.time }}</h2>
+<h2>{{ post.post }}</h2>
+
+{% endfor %}

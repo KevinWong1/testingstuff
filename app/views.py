@@ -18,13 +18,45 @@ for page in all_content_files:
     })
 year = datetime.datetime.now().strftime('%Y')
 
-def index(request):
+
+from .models import Blog
+
+def add_blog_post(request):
+    context = {}
+    # First, check if they have submitted something:
+    if 'name' in request.POST:
+
+        # Then, get the name out of the POST dictionary
+        name = request.POST['name']
+        post = request.POST['post']
+        time = request.POST['time']
+        date = request.POST['date']
+
+        # Finally, actually create the appointment
+        Blog.objects.create(
+            name=name,
+            date=date,
+            time=time,
+            post = post,
+        )
+
+    return render(request, 'add_blog_post.html', context)
+
+def view_blog_post(request):
+    posts = Blog.objects.all()
     context = {
-    "title": "index",
+        'posts': posts,
+    }
+    return render(request, 'blog_posts.html', context)
+
+
+def blog(request):
+    context = {
+    "title": "blog",
     "year": str(year),
     "pages": pages,
     }
-    return render(request, "content/index.html", context)
+    return render(request, "content/blog.html", context)
 
 def about(request):
     context = {

@@ -17,10 +17,12 @@ from django.contrib import admin
 from django.urls import path
 from app import views
 urlpatterns = [
-    path('', views.index),
-    path('index', views.index),
-    path('about', views.about),
-    path('projects', views.projects),
-    path('weather', views.weather),
+    path('', views.blog),
+    path('blog-posts',views.view_blog_post),
+    path('add-blog-post', views.add_blog_post),
+    path('blog', views.blog, name='blog'),
+    path('about', views.about, name='about'),
+    path('projects', views.projects, name='projects'),
+    path('weather', views.weather, name='weather'),
     path('admin/', admin.site.urls),
 ]

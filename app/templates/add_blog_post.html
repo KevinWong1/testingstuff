@@ -1,0 +1,9 @@
+<h3>Add Blog Posts</h3>
+<form action="/add-blog-post" method="POST">
+  {% csrf_token %}
+  <input name="name" placeholder="Name" />
+  <input name="time" placeholder="time" />
+  <input name="date" placeholder="Appt Date" />
+  <input name="post" placeholder="post" />
+  <button>Submit</button>
+</form>
