@@ -25,4 +25,5 @@ urlpatterns = [
     path('projects', views.projects, name='projects'),
     path('weather', views.weather, name='weather'),
     path('admin/', admin.site.urls),
+    path('edit-blog-posts/<post_id>', views.edit_blog_posts),
 ]

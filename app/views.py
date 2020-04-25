@@ -24,7 +24,11 @@ class BlogPostForm(forms.Form):
         time = forms.CharField(max_length=100)
         date = forms.CharField(max_length=100)
 
-
+class EditPostForm(forms.Form):
+        name = forms.CharField(max_length=100)
+        post = forms.CharField(max_length=100)
+        time = forms.CharField(max_length=100)
+        date = forms.CharField(max_length=100)
 
 from .models import Blog
 
@@ -63,6 +67,39 @@ def view_blog_post(request):
         'posts': posts,
     }
     return render(request, 'blog_posts.html', context)
+
+def edit_blog_posts(request, post_id):
+    # Based on the URL, we retrieve the book_id
+    being_edited = Blog.objects.get(id=post_id)
+    if request.method == 'POST':
+        # Create a form instance and populate it with data from the request
+        form = EditPostForm(request.POST)
+        if form.is_valid():
+            # U in CRUD --- UPDATE books in database
+            # Update the properties on the book being edited
+            being_edited.name = form.cleaned_data['name']
+            being_edited.time = form.cleaned_data['time']
+            being_edited.date = form.cleaned_data['date']
+            being_edited.post = form.cleaned_data['post']
+            # Actually save the changes to the database
+            being_edited.save()
+            return redirect('/blog-posts') # Redirect back to main-page
+    else:
+        # If a GET, instead of making a totally blank form like we normally do,
+        # we'll fill it in the with the data already in the book
+        initial_book_data = {
+            'name': being_edited.name,
+            'time': being_edited.time,
+            'date': being_edited.date,
+            'post': being_edited.post,
+        }
+        
+        form = EditPostForm(initial=initial_book_data)
+
+    context = {
+        'form': form,
+    }
+    return render(request, 'edit_blog_posts.html', context)
 
 
 def blog(request):

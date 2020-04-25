@@ -1,0 +1,10 @@
+<h3>Edit Blog Posts</h3>
+<form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <!-- <input name="name" placeholder="Name" />
+    <input name="time" placeholder="time" />
+    <input name="date" placeholder="Appt Date" />
+    <input name="post" placeholder="post" /> -->
+    <button>Submit</button>
+</form>
